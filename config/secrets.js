@@ -1,7 +1,5 @@
-const dotenv = require('dotenv')
-
-dotenv.config()
-
-const { MONGO_URI, JWT_SECRET } = process.env
-
-module.exports = { MONGO_URI, JWT_SECRET }
+if (process.env.NODE_ENV === "production") {
+    module.exports = require('./prod')
+} else {
+    module.exports = require('./dev')
+}

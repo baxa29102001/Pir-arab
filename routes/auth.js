@@ -6,6 +6,7 @@ const UseProduct = require('../models/use')
 const Users = require('../models/users')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const config = require('../config/secrets')
 
 router.get('/adress',async(req,res)=>{
     const manzillar = await Manzil.find()
@@ -150,7 +151,7 @@ router.post('/login',async (req, res) => {
         message: "Kiritilgan parol noto'gri! Qaytadan urinib ko'ring",
       });
 
-        await jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' }, (err,token) => {
+        await jwt.sign({ id: user._id }, config.JWT_SECRET, { expiresIn: '24h' }, (err,token) => {
             if (err) console.log(err)
             
             res.status(200).json({

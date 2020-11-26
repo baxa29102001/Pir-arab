@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
+const config = require('../config/secrets')
 
 
 const connectDb = async () => {
     try {
-        await mongoose.connect('mongodb+srv://baxa_2910:bohodir29102001<>@cluster0.dlfui.mongodb.net/<Mahsulotlar>?retryWrites=true&w=majority',{
+        await mongoose.connect(config.mongodb_url,{
             useNewUrlParser:true,
             useUnifiedTopology:true
         })

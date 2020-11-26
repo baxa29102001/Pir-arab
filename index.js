@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const connect = require("./database/db")
 const authrouter = require('./routes/auth')
+const path = require('path')
+const config = require('./config/secrets')
 
-require('dotenv').config()
+
 
 //Middleware functions
 
@@ -12,7 +14,12 @@ app.use(express.json())
 app.use('/api',authrouter)
 
 
-
+if (process.env.NODE_ENV == 'production') {
+    app.use(express.static('client build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
 
 
